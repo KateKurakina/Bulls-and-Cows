@@ -1,6 +1,8 @@
-export const filterInput = (value: string, base: number): string => {
-  void value;
-  void base;
+import { createDigitValidator } from '../logic/createDigitValidator.js';
 
-  return '';
+export const filterInput = (value: string, base: number): string => {
+  const valueArray = Array.from(value);
+  const isValidDigit = createDigitValidator(base);
+
+  return valueArray.filter(isValidDigit).join('').toUpperCase();
 };
