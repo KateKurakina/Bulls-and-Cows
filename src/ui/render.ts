@@ -71,41 +71,50 @@ export const renderGame = (): void => {
 
   gameSettings.append(labelLength, selectLength);
 
-  const gameButton = document.createElement('button');
-  gameButton.className = 'game__button game__button--new';
-  gameButton.id = 'new-game';
-  gameButton.type = 'button';
-  gameButton.textContent = 'New game';
+  const gameButtonStart = document.createElement('button');
+  gameButtonStart.className = 'game__button game__button--start';
+  gameButtonStart.id = 'start-game';
+  gameButtonStart.type = 'button';
+  gameButtonStart.textContent = 'Start game';
 
-  gameSettings.append(gameButton);
+  gameSettings.append(gameButtonStart);
 
   const gameInput = document.createElement('section');
-  gameInput.className = 'game__input';
+  gameInput.className = 'game__input game__input--guess';
+  gameInput.style.display = 'none';
 
   const inputGuessLabel = document.createElement('label');
   inputGuessLabel.className = 'game__label';
   inputGuessLabel.htmlFor = 'guess';
   inputGuessLabel.textContent = 'Your guess: ';
 
-  const inputGuessInput = document.createElement('input');
-  inputGuessInput.className = 'game__field';
-  inputGuessInput.id = 'guess';
-  inputGuessInput.type = 'text';
-  inputGuessInput.autocomplete = 'off';
-  inputGuessInput.disabled = true;
+  const guessInput = document.createElement('input');
+  guessInput.className = 'game__field';
+  guessInput.id = 'guess';
+  guessInput.type = 'text';
+  guessInput.autocomplete = 'off';
+  guessInput.disabled = true;
 
-  const inputGuessButton = document.createElement('button');
-  inputGuessButton.className = 'game__button game__button--submit';
-  inputGuessButton.id = 'submit-guess';
-  inputGuessButton.type = 'button';
-  inputGuessButton.textContent = 'Submit';
-  inputGuessButton.disabled = true;
+  const submitGameButton = document.createElement('button');
+  submitGameButton.className = 'game__button game__button--submit';
+  submitGameButton.id = 'submit-guess';
+  submitGameButton.type = 'button';
+  submitGameButton.textContent = 'Submit';
+  submitGameButton.disabled = true;
+
+  const newGameButton = document.createElement('button');
+  newGameButton.className = 'game__button game__button--new';
+  newGameButton.id = 'new-game';
+  newGameButton.type = 'button';
+  newGameButton.textContent = 'New Game';
+  newGameButton.disabled = true;
 
   game.append(gameInput);
-  gameInput.append(inputGuessLabel, inputGuessInput, inputGuessButton);
+  gameInput.append(inputGuessLabel, guessInput, submitGameButton, newGameButton);
 
   const gameHistory = document.createElement('section');
   gameHistory.className = 'game__history';
+  gameHistory.style.display = 'none';
 
   const historyHeader = document.createElement('h2');
   historyHeader.className = 'game__subtitle';
@@ -122,6 +131,7 @@ export const renderGame = (): void => {
   gameMessage.className = 'game__message';
   gameMessage.id = 'game-message';
   gameMessage.ariaLive = 'polite';
+  gameMessage.style.display = 'none';
 
   game.append(gameMessage);
 
