@@ -9,6 +9,20 @@ export const renderLeaderboard = (scores: LeaderboardEntry[]): void => {
 
   leaderboardBody.replaceChildren();
 
+  if (scores.length === 0) {
+    const row = document.createElement('tr');
+    const cell = document.createElement('td');
+
+    cell.textContent = 'No records yet';
+    cell.colSpan = 3;
+    cell.className = 'game__leaderboard-empty';
+
+    row.append(cell);
+    leaderboardBody.append(row);
+
+    return;
+  }
+
   scores.forEach((score, index) => {
     const row = document.createElement('tr');
 
