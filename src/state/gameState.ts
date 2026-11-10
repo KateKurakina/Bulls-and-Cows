@@ -24,13 +24,18 @@ export const initialGameState: GameState = {
   startTime: null,
 };
 
-export const createGameState = (base: number, length: number): GameState => {
+export const createGameState = (
+  base: number,
+  length: number,
+  random: () => number = Math.random,
+  now: () => number = Date.now,
+): GameState => {
   return {
-    secret: generateSecret(length, base),
+    secret: generateSecret(length, base, random),
     base,
     length,
     attempts: [],
     isGameOver: false,
-    startTime: Date.now(),
+    startTime: now(),
   };
 };
