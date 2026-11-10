@@ -1,8 +1,10 @@
+import { createDigitValidator } from '../logic/createDigitValidator.js';
+
 export const isValidGuess = (guess: string, length: number, base: number): boolean => {
-  const digits = Array.from({ length: base }, (_, index) => index);
   const guessArray = Array.from(guess);
 
-  const includeDigit = guessArray.every((guessDigit) => digits.includes(+guessDigit));
+  const isValidDigit = createDigitValidator(base);
+  const includeDigit = guessArray.every(isValidDigit);
 
   if (!includeDigit) return false;
 
