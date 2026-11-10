@@ -1,6 +1,8 @@
 export interface LeaderboardEntry {
   attempts: number;
   time: number;
+  base: number;
+  length: number;
 }
 
 export const getTopScores = (scores: LeaderboardEntry[]): LeaderboardEntry[] => {
