@@ -67,4 +67,18 @@ describe('leaderboard storage', () => {
     expect(loadLeaderboard(10, 4, storage)).toHaveLength(10);
     expect(loadLeaderboard(10, 4, storage)[0].attempts).toBe(1);
   });
+
+  it('should return an empty array when saved data is invalid JSON', () => {
+    const storage = createStorage();
+    storage.setItem('bulls-and-cows-leaderboard-10-4', '{invalid');
+
+    expect(loadLeaderboard(10, 4, storage)).toEqual([]);
+  });
+
+  it('should return an empty array when saved data is not an array', () => {
+    const storage = createStorage();
+    storage.setItem('bulls-and-cows-leaderboard-10-4', '{"attempts": 3}');
+
+    expect(loadLeaderboard(10, 4, storage)).toEqual([]);
+  });
 });

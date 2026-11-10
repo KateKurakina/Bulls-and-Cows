@@ -135,5 +135,37 @@ export const renderGame = (): void => {
 
   game.append(gameMessage);
 
+  const leaderboard = document.createElement('section');
+  leaderboard.className = 'game__leaderboard';
+
+  const leaderboardHeader = document.createElement('h2');
+  leaderboardHeader.className = 'game__subtitle';
+  leaderboardHeader.textContent = 'Leaderboard';
+
+  const leaderboardTable = document.createElement('table');
+  leaderboardTable.className = 'game__leaderboard-table';
+  leaderboardTable.id = 'leaderboard';
+
+  const leaderboardHead = document.createElement('thead');
+  const leaderboardHeaderRow = document.createElement('tr');
+
+  const headers = ['Place', 'Attempts', 'Time'];
+
+  headers.forEach((text) => {
+    const th = document.createElement('th');
+    th.textContent = text;
+    leaderboardHeaderRow.append(th);
+  });
+
+  leaderboardHead.append(leaderboardHeaderRow);
+
+  const leaderboardBody = document.createElement('tbody');
+  leaderboardBody.id = 'leaderboard-body';
+
+  leaderboardTable.append(leaderboardHead, leaderboardBody);
+  leaderboard.append(leaderboardHeader, leaderboardTable);
+
+  game.append(leaderboard);
+
   document.body.append(game);
 };

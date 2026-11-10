@@ -3,8 +3,11 @@ import { createGameState, initialGameState, type GameState } from './state/gameS
 import { filterInput } from './ui/input.js';
 import { isValidGuess } from './logic/isValidGuess.js';
 import { evaluateGuess } from './logic/evaluateGuess.js';
+import { saveLeaderboardEntry, loadLeaderboard } from './storage/leaderboardStorage.js';
+import { renderLeaderboard } from './ui/leaderboard.js';
 
 renderGame();
+renderLeaderboard(loadLeaderboard(10, 4));
 
 let gameState: GameState = initialGameState;
 const baseSelect = document.querySelector<HTMLSelectElement>('#base');
@@ -20,6 +23,8 @@ if (baseSelect && lengthSelect) {
     } else {
       lengthSelect.disabled = false;
     }
+
+    renderLeaderboard(loadLeaderboard(Number(baseSelect.value), Number(lengthSelect.value)));
   });
 }
 
@@ -102,6 +107,15 @@ if (submitGameButton) {
       gameState.isGameOver = true;
 
       const elapsedSeconds = gameState.startTime !== null ? Math.floor((Date.now() - gameState.startTime) / 1000) : 0;
+
+      saveLeaderboardEntry({
+        attempts: gameState.attempts.length,
+        time: elapsedSeconds,
+        base: gameState.base,
+        length: gameState.length,
+      });
+
+      renderLeaderboard(loadLeaderboard(gameState.base, gameState.length));
 
       showGameMessage(
         `Congratulations! You won in ${gameState.attempts.length} attempts and ${elapsedSeconds} seconds!`,
