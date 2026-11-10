@@ -1,0 +1,46 @@
+.game {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 24px;
+  font-family: Arial, sans-serif;
+}
+
+.game__title {
+  text-align: center;
+}
+
+.game__settings,
+.game__input {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.game__label {
+  font-weight: 600;
+}
+
+.game__select,
+.game__field {
+  padding: 8px;
+}
+
+.game__button {
+  padding: 8px 16px;
+  cursor: pointer;
+}
+
+.game__history {
+  margin-top: 32px;
+}
+
+.game__history-list {
+  padding-left: 24px;
+}
+
+.game__message {
+  min-height: 24px;
+  text-align: center;
+}
