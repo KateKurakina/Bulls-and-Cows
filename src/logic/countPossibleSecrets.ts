@@ -1,22 +1,18 @@
+const memo = new Map<string, number>();
+
 export const countPossibleSecrets = (length: number, base: number): number => {
-  const memo = new Map<string, number>();
+  if (length > base) return 0;
+  if (length === 0) return 1;
 
-  const count = (remainingLength: number, remainingBase: number): number => {
-    if (remainingLength > remainingBase) return 0;
-    if (remainingLength === 0) return 1;
+  const key = `${length}-${base}`;
 
-    const key = `${remainingLength}-${remainingBase}`;
+  if (memo.has(key)) {
+    return memo.get(key)!;
+  }
 
-    if (memo.has(key)) {
-      return memo.get(key)!;
-    }
+  const result = base * countPossibleSecrets(length - 1, base - 1);
 
-    const result = remainingBase * count(remainingLength - 1, remainingBase - 1);
+  memo.set(key, result);
 
-    memo.set(key, result);
-
-    return result;
-  };
-
-  return count(length, base);
+  return result;
 };
